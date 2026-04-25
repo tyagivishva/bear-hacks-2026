@@ -1,0 +1,17 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / Vite
+**/node_modules/
+**/dist/
+**/dist-ssr/
+
+# Env files
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+
