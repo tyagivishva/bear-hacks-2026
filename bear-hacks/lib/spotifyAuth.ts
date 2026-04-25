@@ -8,6 +8,20 @@
 const TOKEN_KEY = 'btn_spotify_token_v1'
 const VERIFIER_KEY = 'btn_spotify_pkce_verifier_v1'
 
+function getRedirectUri() {
+  // IMPORTANT: Spotify requires the redirect_uri to exactly match one of the
+  // whitelisted Redirect URIs in the Spotify dashboard.
+  //
+  // For hackathon demos, people often open the dev server using a LAN IP
+  // (e.g. http://192.168.x.x:3000). That would generate a different redirect_uri
+  // than localhost and cause "redirect_uri: Not matching configuration".
+  //
+  // Defaulting to localhost keeps the redirect stable.
+  const fromEnv = process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI
+  if (fromEnv) return fromEnv
+  return 'http://localhost:3000/callback'
+}
+
 export type SpotifyToken = {
   access_token: string
   token_type: string
@@ -75,7 +89,7 @@ export async function beginSpotifyLogin() {
   localStorage.setItem(VERIFIER_KEY, verifier)
   const challenge = base64UrlEncode(await sha256(verifier))
 
-  const redirectUri = `${window.location.origin}/callback`
+  const redirectUri = getRedirectUri()
   const scopes = [
     'streaming',
     'user-read-email',
@@ -107,7 +121,7 @@ export async function exchangeCodeForToken(code: string) {
   const verifier = localStorage.getItem(VERIFIER_KEY)
   if (!verifier) throw new Error('Missing PKCE verifier (try login again)')
 
-  const redirectUri = `${window.location.origin}/callback`
+  const redirectUri = getRedirectUri()
 
   const body = new URLSearchParams({
     client_id: clientId,
