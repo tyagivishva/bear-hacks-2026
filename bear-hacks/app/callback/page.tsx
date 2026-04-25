@@ -34,7 +34,7 @@ export default function CallbackPage() {
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 grid place-items-center px-6">
       <div className="max-w-md w-full rounded-2xl border border-white/10 bg-white/5 p-6">
-        <h1 className="text-lg font-semibold">Break the Norm</h1>
+        <h1 className="text-lg font-semibold">AURA</h1>
         <p className="mt-2 text-sm text-zinc-300">{msg}</p>
       </div>
     </main>

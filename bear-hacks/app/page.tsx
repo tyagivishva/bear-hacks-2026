@@ -76,7 +76,7 @@ export default function Page() {
           <header className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-200">
-                <span className={isHype ? 'animate-glitch' : ''}>Break the Norm</span>
+                <span className={isHype ? 'animate-glitch' : ''}>AURA</span>
                 <span className="text-zinc-400">·</span>
                 <span className="text-zinc-300">HypeRate</span>
                 <span className="text-zinc-400">→</span>

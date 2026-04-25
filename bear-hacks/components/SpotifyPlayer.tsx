@@ -80,7 +80,7 @@ export function SpotifyPlayer({
       .then(() => {
         if (!mounted) return
         const player = new window.Spotify.Player({
-          name: 'Break the Norm (Web Player)',
+          name: 'AURA (Web Player)',
           getOAuthToken: (cb: (t: string) => void) => cb(token.access_token),
           volume: 0.8,
         })
@@ -178,7 +178,7 @@ export function SpotifyPlayer({
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="text-xs uppercase tracking-widest text-zinc-300">Spotify</div>
-          <div className="mt-1 text-lg font-semibold">Break the Norm Player</div>
+          <div className="mt-1 text-lg font-semibold">AURA Player</div>
           <div className="mt-1 text-sm text-zinc-300">
             {token?.access_token ? (
               <span>

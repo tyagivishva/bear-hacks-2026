@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Break the Norm',
+  title: 'AURA',
   description: 'A biometrics-reactive Spotify player for Bear Hacks.',
 }
 
