@@ -66,7 +66,9 @@ export function logoutSpotify() {
 export async function beginSpotifyLogin() {
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
   if (!clientId) {
-    throw new Error('Missing NEXT_PUBLIC_SPOTIFY_CLIENT_ID')
+    throw new Error(
+      'Missing NEXT_PUBLIC_SPOTIFY_CLIENT_ID. Create `bear-hacks/.env.local` (not the repo root) and restart `npm run dev`.',
+    )
   }
 
   const verifier = randomVerifier()
@@ -96,7 +98,11 @@ export async function beginSpotifyLogin() {
 
 export async function exchangeCodeForToken(code: string) {
   const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
-  if (!clientId) throw new Error('Missing NEXT_PUBLIC_SPOTIFY_CLIENT_ID')
+  if (!clientId) {
+    throw new Error(
+      'Missing NEXT_PUBLIC_SPOTIFY_CLIENT_ID. Create `bear-hacks/.env.local` (not the repo root) and restart `npm run dev`.',
+    )
+  }
 
   const verifier = localStorage.getItem(VERIFIER_KEY)
   if (!verifier) throw new Error('Missing PKCE verifier (try login again)')

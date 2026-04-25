@@ -96,6 +96,21 @@ export function SpotifyPlayer({
           setDeviceId(null)
         })
 
+        player.addListener('initialization_error', ({ message }: { message: string }) => {
+          setErr(`Spotify init error: ${message}`)
+        })
+        player.addListener('authentication_error', ({ message }: { message: string }) => {
+          setErr(
+            `Spotify auth error: ${message}. Common causes: wrong redirect URI, expired token, or missing scopes.`,
+          )
+        })
+        player.addListener('account_error', ({ message }: { message: string }) => {
+          setErr(`Spotify account error: ${message}. Web Playback requires Spotify Premium.`)
+        })
+        player.addListener('playback_error', ({ message }: { message: string }) => {
+          setErr(`Spotify playback error: ${message}`)
+        })
+
         player.addListener('player_state_changed', (s: any) => {
           if (!s) return
           const track = s.track_window?.current_track
@@ -190,6 +205,12 @@ export function SpotifyPlayer({
             )}
           </div>
           {err ? <div className="mt-2 text-sm text-red-300">{err}</div> : null}
+          {!token?.access_token ? (
+            <div className="mt-2 text-xs text-zinc-400">
+              If login doesn’t open, make sure you set <span className="text-zinc-200">NEXT_PUBLIC_SPOTIFY_CLIENT_ID</span> in{' '}
+              <span className="text-zinc-200">bear-hacks/.env.local</span> and restarted the dev server.
+            </div>
+          ) : null}
         </div>
 
         <div className="flex items-center gap-2">
